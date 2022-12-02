@@ -13,6 +13,9 @@
     <HelpCenterVue />
   </div>
   <div>
+  <AuditVue/>
+  </div>
+  <div>
     <PartnerServeVue/>
   </div>
 </template>
@@ -22,6 +25,7 @@ import TableYRateVue from "../TableYRate.vue";
 import ProgramFeaturesVue from "../ProgramFeatures.vue";
 import HelpCenterVue from "../HelpCenter.vue";
 import PartnerServeVue from "../PartnerServe.vue";
+import AuditVue from "../AuditReport.vue";
 export default {
   name: "LayoutServe",
   components: {
@@ -29,7 +33,11 @@ export default {
     TableYRateVue,
     ProgramFeaturesVue,
     HelpCenterVue,
-    PartnerServeVue
+    PartnerServeVue,
+    AuditVue,
   },
 };
 </script>
+<style>
+
+</style>

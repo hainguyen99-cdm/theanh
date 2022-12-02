@@ -1,6 +1,6 @@
 <template>
   <div class="yrate text-light">
-    <div><H3>yield rate</H3></div>
+    <div><H3>Yield rate</H3></div>
     <div>
       <table class="table table-sm text-light">
         <thead>

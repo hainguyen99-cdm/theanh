@@ -23,3 +23,5 @@ import AppTabaleReward  from '../AppTabaleReward.vue';
     }
 
 </script>
+<style>
+</style>

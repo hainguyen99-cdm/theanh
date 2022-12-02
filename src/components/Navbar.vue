@@ -33,7 +33,7 @@
             <a class="nav-link active" aria-current="page" href="/personal">Personal</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">connect</a>
+            <p class="nav-link active">{{address}}</p>
           </li>
         </ul>
       </div>
@@ -42,7 +42,41 @@
   </Header>
 </template>
 <script>
+
+
 export default {
   name: "AppNavbar",
-};
+  data(){
+    return{
+      address:{},
+    };
+
+  },
+  created(){
+    this.connect();
+    this.timer = setInterval(this.fetchData, 3000);
+  },
+ 
+  methods: {
+    async connect(){
+     const flag = false;
+     if(!flag){
+      this.address="connect";
+     }
+    },
+    cancelAutoUpdate() {
+      clearInterval(this.timer);
+    },
+ 
+  },
+  beforeUnmount() {
+    this.cancelAutoUpdate();
+  },
+}; 
+
 </script>
+<style scoped>
+nav{
+  border-radius: 5px;
+}
+</style>

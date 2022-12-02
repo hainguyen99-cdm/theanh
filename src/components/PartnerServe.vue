@@ -3,16 +3,22 @@
     <div><H3>Partner</H3></div>
     <div class="d-flex justify-content-evenly">
       <div>
-        <div>icon</div>
-        <div>HuoBiECOChain</div>
+        <div>
+    <img src="../assets/hub.png" alt="">
+        </div>
+        <div class="value">HuoBiECOChain</div>
       </div>
       <div>
-        <div>icon</div>
-        <div>BINANCE</div>
+        <div>
+          <img src="../assets/binace.png" alt="">
+        </div>
+        <div class="value">BINANCE</div>
       </div>
       <div>
-        <div>icon</div>
-        <div>Coinbase</div>
+        <div>
+          <img src="../assets/coibase.png" alt="">
+        </div>
+        <div class="value">Coinbase</div>
       </div>
     </div>
   </div>
@@ -24,6 +30,7 @@ export default {
 </script>
 <style scoped>
 .partner {
+  margin-top: 10px;
   border-radius: 5px;
   background: rgb(28, 60, 121);
 }

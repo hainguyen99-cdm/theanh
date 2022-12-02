@@ -23,12 +23,20 @@ export default {
 <style>
 #app {
  
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  
+  font-family: URWDIN,-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei";
   background: rgb(140, 152, 179);
+}
+
+.title{
+font-weight: 550;
+
+}
+.value{
+margin-top: 8px;
 }
 </style>
