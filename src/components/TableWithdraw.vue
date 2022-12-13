@@ -8,12 +8,6 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      
     </tbody>
   </table>
   </div>

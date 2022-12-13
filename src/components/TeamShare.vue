@@ -3,9 +3,10 @@
     <div class="title ">
       <h2>Team Profile</h2>
     </div>
-    <div class="d-flex bd-highlight mb-2">
+    <div v-if="account!='Not connect'">
+    <div class="d-flex bd-highlight mb-2" >
       <div class="p-2 bd-highlight">Address</div>
-      <div class="ms-auto p-2 bd-highlight">0</div>
+      <div class="ms-auto p-2 bd-highlight">{{account}}</div>
     </div>
     <div class="d-flex bd-highlight mb-2">
       <div class="p-2 bd-highlight">Number of teams</div>
@@ -28,6 +29,7 @@
       <div class="ms-auto p-2 bd-highlight">0/0.00ETH</div>
     </div>
   </div>
+</div>
   <div class="team" style="margin-top:10px ;">
     <div>
       <div class="title text-light">
@@ -103,8 +105,58 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 export default {
   name: "TeamShare",
+
+  data() {
+    return {
+      account: "Not connect",
+    };
+  },
+  created() {
+    this.getAccount();
+    this.timer = setInterval(this.fetchData, 3000);
+  },
+
+  methods: {
+   
+    async getAccount() {
+      const { ethereum } = window;
+      var accounts = [];``
+      if (ethereum !== "undefined") {
+        accounts = await ethereum.request({
+          method: "eth_requestAccounts",
+        });
+        this.account = accounts[0];
+        const address ={address: accounts[0]};
+      console.log(address);
+      axios
+         .post("http://103.74.102.25/wallet?address",JSON.stringify(address) ,{
+           headers: {
+             'Content-Type': 'application/json',
+             "Access-Control-Allow-Methods": "*"
+           },
+         })
+         .then((res) => {
+         console.log(res)
+      
+         })
+         .catch((err) => {
+           console.log(err.response);
+         },
+ 
+        
+         );
+      }
+    },
+    cancelAutoUpdate() {
+      clearInterval(this.timer);
+    },
+  },
+  beforeUnmount() {
+    this.cancelAutoUpdate();
+  },
 };
 </script>
 <style scoped>

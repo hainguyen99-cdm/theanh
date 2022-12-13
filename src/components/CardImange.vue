@@ -20,12 +20,12 @@
           <div class="row align-items-start">
             <div class="col">
               <div class="title">Participant</div>
-              <div class="value">127361</div>
+              <div class="value">{{participant}}</div>
             </div>
             <div class="col">
               <div class="title">Current Hashrate</div>
 
-              <div class="value">2132312312</div>
+              <div class="value">{{validNode}}</div>
             </div>
             <div class="col">
               <div class="title">yield rate</div>
@@ -41,12 +41,12 @@
                 <div
                   class="progress-bar"
                   role="progressbar"
-                  style="width: 25%"
+                  style="width: 68%"
                   aria-valuenow="25"
                   aria-valuemin="0"
-                  aria-valuemax="100"
+                  aria-valuemax="1000"
                 >
-                  25%
+                  {{totalOutput}}
                 </div>
               </div>
             </div>
@@ -56,12 +56,12 @@
                 <div
                   class="progress-bar"
                   role="progressbar"
-                  style="width: 25%"
+                  style="width: 60%"
                   aria-valuenow="25"
                   aria-valuemin="0"
-                  aria-valuemax="100"
+                  aria-valuemax="1000"
                 >
-                  25%
+                  {{userRevenue}}
                 </div>
               </div>
             </div>
@@ -76,6 +76,14 @@ import axios from "axios";
 
 export default {
   name: "AppCarImange",
+  data(){
+    return{
+      participant:{},
+      totalOutput:{},
+      userRevenue:{},
+      validNode:{}
+    }
+  },
   created() {
     this.apieth();
 
@@ -83,17 +91,19 @@ export default {
   },
   methods: {
     async apieth() {
-      const config = { id: "5", m: "null", reffer: "https://ethereumsix.com" };
-
+      
      axios
-        .post("https://ethereumsix.com/api/config", JSON.stringify(config), {
+        .get("http://103.74.102.25/system",{
           headers: {
             'Content-Type': 'application/json',
             "Access-Control-Allow-Methods": "*"
           },
         })
         .then((res) => {
-          console.log(res);
+        this.participant=res.data.data[0].participant;
+        this.totalOutput=res.data.data[0].totalOutputEth;
+        this.userRevenue= res.data.data[0].userRevenueUsdt;
+        this.validNode=res.data.data[0].currentHashrate;
      
         })
         .catch((err) => {
