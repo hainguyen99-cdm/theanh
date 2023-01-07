@@ -8,29 +8,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td colspan="1">{{ address }}</td>
-          <td>{{ balance }} $</td>
-        </tr>
-        <tr>
-          <td colspan="1">{{ address1 }}</td>
-          <td>{{ balance1 }} $</td>
-        </tr>
-        <tr>
-          <td colspan="1">{{ address2 }}</td>
-          <td>{{ balance2 }} $</td>
-        </tr>
-        <tr>
-          <td colspan="1">{{ address3 }}</td>
-          <td>{{ balance3 }} $</td>
-        </tr>
-        <tr>
-          <td colspan="1">{{ address4 }}</td>
-          <td>{{ balance4 }} $</td>
-        </tr>
-        <tr>
-          <td colspan="1">{{ address5 }}</td>
-          <td>{{ balance5 }} $</td>
+        <tr v-for="item in myArray" :key="item.id">
+          <td colspan="1">{{ item.address }}</td>
+          <td>{{ item.dataBalance }} $</td>
         </tr>
       </tbody>
     </table>
@@ -42,9 +22,25 @@ export default {
   name: "AddressBalance",
   data() {
     return {
-      address: {},
-      balance: {},
-      time: "",
+      myArray: [{
+        address: cryptoRandomString({length: 30}),
+        dataBalance : Math.floor(Math.random() * 500) + 100
+      },{
+        address: cryptoRandomString({length: 30}),
+        dataBalance : Math.floor(Math.random() * 500) + 100
+      },{
+        address: cryptoRandomString({length: 30}),
+        dataBalance : Math.floor(Math.random() * 500) + 100
+      },{
+        address: cryptoRandomString({length: 30}),
+        dataBalance : Math.floor(Math.random() * 500) + 100
+      },{
+        address: cryptoRandomString({length: 30}),
+        dataBalance : Math.floor(Math.random() * 500) + 100
+      },{
+        address: cryptoRandomString({length: 30}),
+        dataBalance : Math.floor(Math.random() * 500) + 100
+      }]
     };
   },
   created() {
@@ -53,35 +49,19 @@ export default {
   },
   methods: {
     async fetchData() {
+      {
+    for( var i = 0; i<1; i++) {
+    if(this.myArray.length >=6){
+    this.myArray.splice(5,1); 
+    this.myArray.unshift({
+        address: cryptoRandomString({length: 30}),
+        dataBalance : Math.floor(Math.random() * 500) + 100
+      })
+    // console.log(this.myArray)
+}
+}
 
-      this.address =cryptoRandomString({length: 30});
-      const dataBalance = Math.floor(Math.random() * 500) + 100;
-      this.balance = dataBalance;
-
-      
-      this.address1 =cryptoRandomString({length: 30});
-      const dataBalance1 = Math.floor(Math.random() * 500) + 100;
-      this.balance1 = dataBalance1;
-
-     
-      this.address2 =cryptoRandomString({length: 30});
-      const dataBalance2 = Math.floor(Math.random() * 500) + 100;
-      this.balance2 = dataBalance2;
-
- 
-      this.address3 =cryptoRandomString({length: 30});
-      const dataBalance3 = Math.floor(Math.random() * 500) + 100;
-      this.balance3 = dataBalance3;
-
-
-      this.address4 = cryptoRandomString({length: 30});
-      const dataBalance4 = Math.floor(Math.random() * 500) + 100;
-      this.balance4 = dataBalance4;
-
-
-      this.address5 = cryptoRandomString({length: 30});
-      const dataBalance5 = Math.floor(Math.random() * 500) + 100;
-      this.balance5 = dataBalance5;
+}
     },
     cancelAutoUpdate() {
       clearInterval(this.timer);
@@ -99,4 +79,7 @@ export default {
   overflow: hidden;
   background: rgb(28, 37, 77);
 }
-</style>
+</style> 
+
+
+
