@@ -34,7 +34,7 @@ export default {
 
         axios
           .post(
-            "http://103.74.102.25/wallet?address",
+            "/wallet?address",
             JSON.stringify(address),
             {
               headers: {
