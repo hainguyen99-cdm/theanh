@@ -18,6 +18,7 @@
   <div>
     <PartnerServeVue/>
   </div>
+
 </template>
 <script>
 import CardServeVue from "../CardServe.vue";

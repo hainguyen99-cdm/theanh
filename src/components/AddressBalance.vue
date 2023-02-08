@@ -1,6 +1,6 @@
 <template>
-  <div class="scroll">
-    <table class="table table-borderless text-light">
+  <div class="scroll pb-5">
+    <table class="table table-borderless text-light mb-5">
       <thead>
         <tr>
           <th scope="col">User Output</th>

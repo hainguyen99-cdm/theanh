@@ -7,6 +7,7 @@
 <div>
     <AppTabaleReward/>
 </div>
+
 </template>
 
 <script>

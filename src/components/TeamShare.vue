@@ -51,6 +51,7 @@
           >
             Coppy
           </button>
+          <p class = "text-muted"> Send your invitation link, friends join the node through your link, or friends invite other friends to join, you will receive generous token rewards:</p>
         </div>
       </div>
     </div>
@@ -164,5 +165,6 @@ export default {
   padding: 5px;
   border-radius: 10px;
   background: rgb(28, 37, 77);
+  padding-bottom:80px;
 }
 </style>

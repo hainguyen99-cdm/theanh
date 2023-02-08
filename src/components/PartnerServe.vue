@@ -33,5 +33,7 @@ export default {
   margin-top: 10px;
   border-radius: 5px;
   background: rgb(28, 60, 121);
+  margin-bottom:90px;
+  padding-bottom:30px;
 }
 </style>
