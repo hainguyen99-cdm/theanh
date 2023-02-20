@@ -60,19 +60,19 @@ export default {
    
     async getAccount() {
       const { ethereum } = window;
-      var accounts = [];``
+      var accounts = [];
       if (ethereum !== "undefined") {
         accounts = await ethereum.request({
           method: "eth_requestAccounts",
         });
         this.account = accounts[0];
         const address ={address: accounts[0]};
-      console.log(address);
       axios
-         .post("http://103.74.102.25/wallet?address",JSON.stringify(address) ,{
+         .post("/wallet?address",JSON.stringify(address) ,{
            headers: {
              'Content-Type': 'application/json',
              "Access-Control-Allow-Methods": "*"
+             
            },
          })
          .then((res) => {

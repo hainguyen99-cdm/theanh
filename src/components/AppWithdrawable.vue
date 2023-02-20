@@ -34,7 +34,7 @@ export default {
 
         axios
           .post(
-            "http://103.74.102.25/wallet?address",
+            "/wallet?address",
             JSON.stringify(address),
             {
               headers: {
@@ -44,7 +44,7 @@ export default {
             }
           )
           .then((res) => {
-           this.totalOutput= res.data.data.balance
+           this.totalOutput= res.data.data.amountWithdraw
           })
           .catch((err) => {
             console.log(err.response);

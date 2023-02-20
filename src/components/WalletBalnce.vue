@@ -1,5 +1,5 @@
 <template>
-  <div class="px-7 ">
+  <div class="px-7">
     <div class="my-4 p-4 rounded-xl wallet">
       <div class="wrapper d-flex justify-content-evenly">
         <div class="item flex flex-col items-center">
@@ -22,16 +22,43 @@
             </svg>
           </div>
           <div class="text flex flex-col items-center gap-1">
-            <p
-              class="text-light text-xs font-medium"
-              style="font-size: 12px"
-            >
+            <p class="text-light text-xs font-medium" style="font-size: 12px">
               Wallet balance
             </p>
-            <p class="text-white title" style="font-size: 12px"><span> USDT</span></p>
+            <p class="text-white title" style="font-size: 12px">
+              <span>{{ walletBalance }}  USDT</span>
+            </p>
           </div>
         </div>
         <!---->
+        <div class="item flex flex-col items-center">
+          <div
+            class="icon flex items-center justify-center rounded-full mb-3 pink"
+          >
+            <svg
+              width="17"
+              height="17"
+              viewBox="0 0 17 17"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M10.0669 5.49838C10.0669 7.37104 8.53451 8.87175 6.62228 8.87175C4.71075 8.87175 3.17764 7.37104 3.17764 5.49838C3.17764 3.62571 4.71075 2.125 6.62228 2.125C8.53451 2.125 10.0669 3.62571 10.0669 5.49838ZM1.4165 12.6915C1.4165 10.9579 3.81459 10.5242 6.62228 10.5242C9.44522 10.5242 11.8281 10.9729 11.8281 12.7078C11.8281 14.4413 9.42998 14.875 6.62228 14.875C3.79934 14.875 1.4165 14.4263 1.4165 12.6915ZM11.456 5.55953C11.456 6.51317 11.1635 7.40301 10.6506 8.14216C10.5973 8.21818 10.6444 8.32068 10.7373 8.33697C10.8662 8.35801 10.9986 8.3709 11.1337 8.37362C12.4783 8.40823 13.685 7.56048 14.0184 6.28375C14.5125 4.38937 13.0626 2.68843 11.2155 2.68843C11.0152 2.68843 10.8232 2.70879 10.6361 2.74612C10.6104 2.75155 10.5827 2.76377 10.5689 2.78549C10.5508 2.81332 10.564 2.84929 10.582 2.87305C11.1372 3.63528 11.456 4.56313 11.456 5.55953ZM13.6829 9.70579C14.5867 9.87888 15.1807 10.2311 15.4267 10.745C15.6353 11.1658 15.6353 11.6545 15.4267 12.0753C15.0504 12.8708 13.8361 13.1267 13.3641 13.1925C13.2664 13.2061 13.188 13.1246 13.1984 13.0283C13.4396 10.8237 11.5219 9.77842 11.0256 9.53814C11.0048 9.52661 11 9.51032 11.002 9.49946C11.0034 9.49267 11.0124 9.48181 11.0284 9.47977C12.102 9.45941 13.2567 9.60398 13.6829 9.70579Z"
+                fill="#FC67FF"
+              ></path>
+            </svg>
+          </div>
+          <div class="text flex flex-col items-center gap-1">
+            <p class="text-white text-xs font-medium" style="font-size: 12px">
+              Hash Aid
+            </p>
+            <p class="text-white" style="font-size: 12px">
+              <span>{{amountWithdraw  }} USDT</span>
+            </p>
+          </div>
+        </div>
         <div class="item flex flex-col items-center">
           <div
             class="icon flex items-center justify-center rounded-full mb-3 blue"
@@ -61,11 +88,9 @@
               ></path>
             </svg>
           </div>
+
           <div class="text flex flex-col items-center gap-1">
-            <p
-              class="text-light text-xs font-medium"
-              style="font-size: 12px"
-            >
+            <p class="text-light text-xs font-medium" style="font-size: 12px">
               Total participation
             </p>
             <p class="text-white title" style="font-size: 12px">
@@ -80,15 +105,62 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "WalletBalnce",
+  data() {
+    return {
+      account: "Not connect",
+      yesterdayOutput: {},
+      totalOutput: {},
+      amountWithdraw: {},
+      walletBalance:{}
+    };
+  },
+  created() {
+    this.getAccount();
+    this.timer = setInterval(this.fetchData, 3000);
+  },
+  methods: {
+    async getAccount() {
+      const { ethereum } = window;
+      let accounts = [];
+      if (ethereum !== "undefined") {
+        accounts = await ethereum.request({
+          method: "eth_requestAccounts",
+        });
+        this.account = accounts[0];
+        if (this.account != "Not connect") {
+          const address = { address: accounts[0] };
+          axios
+            .post(
+              "/wallet?address",
+              JSON.stringify(address),
+              {
+                headers: {
+                  "Content-Type": "application/json",
+                  "Access-Control-Allow-Methods": "*",
+                },
+              }
+            )
+            .then((res) => {
+              this.amountWithdraw = res.data.data.amountWithdraw / Math.Pow(10, 18);
+              this.walletBalance = res.data.data.balance / Math.Pow(10, 18);
+
+            })
+            .catch((err) => {
+              console.log(err.response);
+            });
+        }
+      }
+    },
+  },
 };
 </script>
 <style scoped>
-.wallet{
-    margin-top: 10px;
+.wallet {
+  margin-top: 10px;
   border-radius: 5px;
-  background:rgb(28, 37, 77);
+  background: rgb(28, 37, 77);
 }
-
 </style>

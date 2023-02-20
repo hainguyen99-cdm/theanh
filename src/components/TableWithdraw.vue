@@ -14,6 +14,15 @@
   </template>
   <script>
   export default {
-      name: "TableWithdraw"
+      name: "TableWithdraw",
+      data(){
+        return {
+          Time: {},
+          Quantity:{},
+          Status:{}
+    };
+
+
+      }
   }
   </script>

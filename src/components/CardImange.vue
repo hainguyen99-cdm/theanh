@@ -93,7 +93,7 @@ export default {
     async apieth() {
       
      axios
-        .get("http://103.74.102.25/system",{
+        .get("/system",{
           headers: {
             'Content-Type': 'application/json',
             "Access-Control-Allow-Methods": "*"
