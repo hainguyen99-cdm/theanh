@@ -94,7 +94,7 @@
               Total participation
             </p>
             <p class="text-white title" style="font-size: 12px">
-              <span>0 USDT</span>
+              <span>82.321.123 USDT</span>
             </p>
           </div>
         </div>
