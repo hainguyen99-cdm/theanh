@@ -6,9 +6,17 @@
       <div class="d-flex justify-content-between  mb-3 ">
           <div class="mr-9"></div>
           <div></div>
-          <div ><svg width="15"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
+  
+          <form class="d-flex">
+          <button class="btn btn-success" type="submit">
+            <svg width="15"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
           <path d="M311.9 260.8L160 353.6 8 260.8 160 0l151.9 260.8zM160 383.4L8 290.6 160 512l152-221.4-152 92.8z"/></svg>
-          {{account}}</div >
+            {{ account }}
+          </button>
+        </form>
+
+
+
         </div>
       <nav class="mobile-bottom-nav">
       <div class="mobile-bottom-nav__item ">
