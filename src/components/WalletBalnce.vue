@@ -144,8 +144,8 @@ export default {
               }
             )
             .then((res) => {
-              this.amountWithdraw = res.data.data.amountWithdraw / Math.Pow(10, 18);
-              this.walletBalance = res.data.data.balance / Math.Pow(10, 18);
+              this.amountWithdraw = res.data.data.amountWithdraw ;
+              this.walletBalance = res.data.data.balance;
 
             })
             .catch((err) => {
