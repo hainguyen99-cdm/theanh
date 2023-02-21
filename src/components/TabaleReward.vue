@@ -7,18 +7,6 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>Mark</td>
-      <td>Otto</td>
-    </tr>
-    <tr>
-      <td>Jacob</td>
-      <td>Thornton</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>@twitter</td>
-    </tr>
   </tbody>
 </table>
 </div>

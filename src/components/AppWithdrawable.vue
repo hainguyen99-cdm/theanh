@@ -44,7 +44,7 @@ export default {
             }
           )
           .then((res) => {
-           this.totalOutput= res.data.data.balance
+           this.totalOutput= res.data.data.amountWithdraw
           })
           .catch((err) => {
             console.log(err.response);
