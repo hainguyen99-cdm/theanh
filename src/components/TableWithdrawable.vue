@@ -37,7 +37,7 @@
                 class="text-light text-xs font-medium pt-1 "
                 style="font-size: 12px"
               >
-                {{ amountWithdraw }} 0.000000USDT
+                {{ amountWithdraw }} USDT
               </p>
             </div>
           </div>
