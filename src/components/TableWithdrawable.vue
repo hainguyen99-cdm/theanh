@@ -37,7 +37,7 @@
                 class="text-light text-xs font-medium pt-1 "
                 style="font-size: 12px"
               >
-                0.000000ETH ≈ 0.000000USDT
+                {{ amountWithdraw }} 0.000000USDT
               </p>
             </div>
           </div>
@@ -48,8 +48,53 @@
   </template>
   
   <script>
+  import axios from "axios";
   export default {
     name: "TableWithdrawable",
+    data() {
+    return {
+      account: "Not connect",
+      yesterdayOutput: {},
+      totalOutput: {},
+      amountWithdraw: {},
+      walletBalance:{}
+    };
+  },
+  methods: {
+    async getAccount() {
+      const { ethereum } = window;
+      let accounts = [];
+      if (ethereum !== "undefined") {
+        accounts = await ethereum.request({
+          method: "eth_requestAccounts",
+        });
+        this.account = accounts[0];
+        if (this.account != "Not connect") {
+          const address = { address: accounts[0] };
+          axios
+            .post(
+              "/wallet?address",
+              JSON.stringify(address),
+              {
+                headers: {
+                  "Content-Type": "application/json",
+                  "Access-Control-Allow-Methods": "*",
+                },
+              }
+            )
+            .then((res) => {
+              this.amountWithdraw = res.data.data.amountWithdraw ;
+              this.walletBalance = res.data.data.balance;
+
+            })
+            .catch((err) => {
+              console.log(err.response);
+            });
+        }
+      }
+    },
+  },
+
   };
   </script>
   <style scoped>
