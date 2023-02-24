@@ -37,7 +37,7 @@
                 class="text-light text-xs font-medium pt-1 "
                 style="font-size: 12px"
               >
-                {{ totalOutput }} USDT
+                test {{ totalOutput }} USDT
               </p>
             </div>
           </div>
