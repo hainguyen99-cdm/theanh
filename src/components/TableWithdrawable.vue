@@ -37,7 +37,7 @@
                 class="text-light text-xs font-medium pt-1 "
                 style="font-size: 12px"
               >
-                {{ amountWithdraw }} USDT
+                {{ totalOutput }} USDT
               </p>
             </div>
           </div>
@@ -83,7 +83,7 @@
               }
             )
             .then((res) => {
-              this.amountWithdraw = res.data.data.amountWithdraw ;
+              this.totalOutput = res.data.data.amountWithdraw ;
               this.walletBalance = res.data.data.balance;
 
             })
