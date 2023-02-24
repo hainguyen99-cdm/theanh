@@ -37,7 +37,7 @@
                 class="text-light text-xs font-medium pt-1 "
                 style="font-size: 12px"
               >
-                test {{ totalOutput }} USDT
+                 {{ totalOutput }} USDT
               </p>
             </div>
           </div>
@@ -59,6 +59,10 @@
       amountWithdraw: {},
       walletBalance:{}
     };
+  },
+  created() {
+    this.getAccount();
+    this.timer = setInterval(this.fetchData, 3000);
   },
   methods: {
     async getAccount() {
