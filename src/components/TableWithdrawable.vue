@@ -75,6 +75,7 @@
         this.account = accounts[0];
         if (this.account != "Not connect") {
           const address = { address: accounts[0] };
+          
           axios
             .post(
               "/wallet?address",
@@ -97,6 +98,7 @@
         }
       }
     },
+    
   },
 
   };
